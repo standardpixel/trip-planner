@@ -1,71 +1,28 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>{{app_title}}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<link href="/lib/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-		<link rel="stylesheet" href="/style/index.css" type="text/css">
-    </head>
-    <body>
-		<div class="navbar navbar-inverse navbar-fixed-top">
-			<div class="navbar-inner">
-				<div class="container">
-					<button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<a class="brand" href="#">{{app_title}}</a>
-					<div class="nav-collapse collapse">
-						<ul class="nav">
-							<li><a href="/">Home</a></li>
-							<li class="active"><a href="/trip">&nbsp;Create a trip</a></li>
-						</ul>
-					</div><!--/.nav-collapse -->
-				</div>
-			</div>
-		</div>
-		
-		<div>
-			<h1>Create a trip</h1>
-			<form>
-			  <fieldset>
-			    <legend>Details</legend>
+<h1>Create a trip</h1>
+<form>
+  <fieldset>
+    <legend>Details</legend>
 				
-				<div class="control-group">
-			   		<label>Give this trip a name</label>
-			    	<input type="text" placeholder="Awesome trip to a place">
-			    	<span class="help-block">Give this trip a short but descriptive name</span>
-				</div>
+	<div class="control-group">
+   		<label>Give this trip a name</label>
+    	<input type="text" placeholder="Awesome trip to a place">
+    	<span class="help-block">Give this trip a short but descriptive name</span>
+	</div>
 				
-				<div class="control-group">
-			    	<label>When does this event start</label>
-			    	<input name="date-start" type="datetime-local" placeholder="August 1st">
-					<span class="help-inline"></span>
-				</div>
+	<div class="control-group">
+    	<label>When does this event start</label>
+    	<input name="date-start" type="datetime-local" placeholder="August 1st">
+		<span class="help-inline"></span>
+	</div>
 				
-				<div class="control-group">
-			    	<label>...and when does it end</label>
-			    	<input name="date-end" type="datetime-local" placeholder="August 9th">
-					<span class="help-inline"></span>
-				</div>
+	<div class="control-group">
+    	<label>...and when does it end</label>
+    	<input name="date-end" type="datetime-local" placeholder="August 9th">
+		<span class="help-inline"></span>
+	</div>
 				
-			  </fieldset>
-			  <fieldset>
-			    <button type="submit" class="btn btn-primary" data-loading-text="Creating your trip...">Create it</button>
-			  </fieldset>
-			</form>
-		</div>
-		
-		<footer>
-			
-		</footer>
-		<script src="http://code.jquery.com/jquery.js"></script>
-		<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
-		<script src="/lib/moment.js"></script>
-		<script src="/js/{{module}}.js"></script>
-    </body>
-</html>
+  </fieldset>
+  <fieldset>
+    <button type="submit" class="btn btn-primary" data-loading-text="Creating your trip...">Create it</button>
+  </fieldset>
+</form>

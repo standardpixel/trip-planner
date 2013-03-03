@@ -1,29 +1,44 @@
 var port       = 3000,
+    fs         = require('fs'),
 	http       = require('http'),
     express    = require('express'),
 	simpledb   = require('simpledb'),
 	colors     = require('colors'),
 	keys       = require(__dirname + '/keys.json'),
     app        = express(),
+	hbs        = require('hbs'),
 	sdb        = new simpledb.SimpleDB({keyid:keys.aws.key,secret:keys.aws.secret}),
 	app_title  = 'StandardPixel event planner';
 
 app.set('views', __dirname + '/ui');
 app.set('view engine', 'html');
-app.engine('html', require('hbs').__express);
+app.engine('html', hbs.__express);
 
-app.get('/trip', function(req,res) {
-	res.render('trip.html', {
-	 	app_title : app_title,
-		module    : 'trip'
+function setupRoute(route_definition, template_name, params) {
+	app.get(route_definition, function(req,res) {
+		fs.readFile(__dirname + '/ui/' + template_name, 'utf8', function(error, data) {
+			if(error) {
+				console.error('Error: Could not load template'.red,error);
+			} else {
+				hbs.registerPartial('route-content', data);
+				
+				params['menu-' + params.module] = true;
+				res.render('main-template.html', params);
+			}
+		});
 	});
+}
+
+setupRoute('/trip', 'trip.html', {
+	app_title  : app_title,
+	page_title : 'Create a trip',
+	module     : 'trip'
 });
 
-app.get('/', function(req,res) {
-	res.render('index.html', {
-	 	app_title : app_title,
-		module    : 'index'
-	});
+setupRoute('/', 'index.html', {
+	app_title  : app_title,
+	page_title : 'Welcome',
+	module     : 'index'
 });
 
 app.use('/js', express.static(__dirname + '/ui/js'));
