@@ -1,11 +1,12 @@
 <h1>Create a trip</h1>
-<form>
+<form id="create-trip">
   <fieldset>
     <legend>Details</legend>
 				
 	<div class="control-group">
    		<label>Give this trip a name</label>
-    	<input type="text" placeholder="Awesome trip to a place">
+    	<input name="name" type="text" placeholder="Awesome trip to a place">
+		<span class="help-inline"></span>
     	<span class="help-block">Give this trip a short but descriptive name</span>
 	</div>
 				
@@ -19,6 +20,17 @@
     	<label>...and when does it end</label>
     	<input name="date-end" type="datetime-local" placeholder="August 9th">
 		<span class="help-inline"></span>
+	</div>
+				
+  </fieldset>
+  <fieldset>
+    <legend>Location</legend>
+				
+	<div class="control-group">
+   		<label>Where will this trip be</label>
+    	<input name="location" type="search" placeholder="100 Fake St, Anytown, State">
+    	<span class="help-inline"></span>
+		<span class="help-block">This can be an address or geographic coordinate</span>
 	</div>
 				
   </fieldset>
