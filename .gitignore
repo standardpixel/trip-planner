@@ -1,5 +1,4 @@
 node_modules
-keys.json
 npm-debug.log
 ui/lib
 .DS_Store
