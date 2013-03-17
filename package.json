@@ -22,7 +22,6 @@
 	"express"   : "*",
 	"hbs"       : "*",
 	"aws-sdk"   : "*",
-	"yui"       : "*",
 	"less"      : "*",
 	"validator" : "*",
 	"mocha"     : "*"
