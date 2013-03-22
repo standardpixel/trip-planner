@@ -24,7 +24,8 @@ SP.responses = {};
 
 SP.trip = (function() {
 	
-	var location_field_verification_id;
+	var location_field_verification_id,
+	    validated_values = {};
 		
 	function init() {
 		initView();
@@ -45,6 +46,7 @@ SP.trip = (function() {
 			
 			if( e.target.value.length > 3 && jQuery.type( e.target.value ) === 'string' && jQuery.type( e.target.value.substring(0,1) ) !== 'number' ) {
 				
+				validated_values[e.target.name] = e.target.value;
 				$(e.target).parent().removeClass('warning');
 				$(e.target).parent().addClass('success');
 				$(e.target).parent().children('.help-inline')[0].innerHTML='Looking good!';
@@ -70,8 +72,11 @@ SP.trip = (function() {
 		//
 		$('form#create-trip input[type=datetime-local]').on('keyup',function(e) {
 			
-			if( moment( e.target.value + ' ' ).isValid() ) {
+			var user_moment = moment( e.target.value + ' ' );
+			
+			if( user_moment.isValid() && user_moment.toDate() > new Date()) {
 				
+				validated_values[e.target.name] = user_moment.valueOf();
 				$(e.target).parent().removeClass('warning');
 				$(e.target).parent().addClass('success');
 				$(e.target).parent().children('.help-inline')[0].innerHTML='Looking good!';
@@ -86,7 +91,7 @@ SP.trip = (function() {
 			
 				$(e.target).parent().removeClass('success');
 				$(e.target).parent().addClass('warning');
-				$(e.target).parent().children('.help-inline')[0].innerHTML='I don\'t read that as a date. Can you write it like "August, 7 1977"';
+				$(e.target).parent().children('.help-inline')[0].innerHTML='I don\'t read that as a date. Can you write it like "August, 7 1977"?';
 				
 			}
 			
@@ -107,7 +112,10 @@ SP.trip = (function() {
 					verifyLocation(e.target.value, function(r) {
 						
 						if( r.length ) {
-				
+
+							validated_values[e.target.name] = r[0].lat + ',' + r[0].lon;
+							validated_values[e.target.name + '_mq_type'] = r[0].type;
+							validated_values[e.target.name + '_mq_place_id'] = r[0].place_id;
 							$(e.target).parent().removeClass('warning');
 							$(e.target).parent().addClass('success');
 							$(e.target).parent().children('.help-inline')[0].innerHTML='I found ' + r[0].display_name + ' which looks like a match.';
@@ -126,6 +134,25 @@ SP.trip = (function() {
 				location_field_verification_id = null;
 	
 			}, 1000);
+			
+		});
+		
+		$('form#create-trip button.btn-primary').on('click',function(e) {
+			
+			e.preventDefault();
+			
+			$.ajax({
+				url: $('form#create-trip')[0].action,
+				method: 'post',
+				data: validated_values,
+				success: function( data ) {
+					if(data && data.status === 'success') {
+						location.href = '/' + data.TripId.split(':::')[0] + '/' + data.TripId.split(':::')[1];
+					} else {
+						console.error('Error: Creating trip', data);
+					}
+				}
+			});
 			
 		});
 		

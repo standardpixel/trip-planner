@@ -13,7 +13,6 @@ app.set('view engine', 'html');
 app.engine('html', hbs.__express);
 
 function setupUIRoute(route_definition, template_name, params) {
-	console.log('setup route called');
 	app.get(route_definition, function(req,res) {
 		fs.readFile(__dirname + '/ui/' + template_name, 'utf8', function(error, data) {
 			if(error) {
@@ -49,16 +48,21 @@ function setupUIRoute(route_definition, template_name, params) {
 function setupAPIRoute(route_definition, params) {
 	app.post(route_definition, function(req,res) {
 		var controller = require(__dirname + '/controllers/' + params.controller).init({
-			request : req
+			request : req,
+			user    : (req.params.user==='me') ? 'eric' : req.params.user //TODO: use authenticated user instead of a hardcoded eric (obviously)
 		}, function(response) {
 			res.json(response);
 		}, this);
 	});
 }
 
-setupAPIRoute('/api/makeTrip', {
-	controller : 'api_make_trip'
-})
+setupAPIRoute('/api/:user/trip/make', {
+	controller : 'api_trip_make'
+});
+
+setupAPIRoute('/api/:user/trip/:trip_id', {
+	controller : 'api_trip_get'
+});
 
 setupUIRoute('/make', 'make.html', {
 	app_title  : app_title,
@@ -71,6 +75,13 @@ setupUIRoute('/:user', 'user.html', {
 	page_title : 'User',
 	module     : 'user',
 	controller : 'user'
+});
+
+setupUIRoute('/:user/trips/:trip_id', 'trip.html', {
+	app_title  : app_title,
+	page_title : 'Trip',
+	module     : 'trip',
+	controller : 'trip'
 });
 
 setupUIRoute('/', 'index.html', {

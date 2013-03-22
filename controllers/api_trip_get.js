@@ -34,6 +34,7 @@ exports.init = function(params, callback, scope) {
 
 	AWS.getDDB().putItem({'TableName':'sp-tripplanner-trips','Item':{
 		'TripId'               : { 'S'  : forsaving['TripId']},
+		'name'                 : { 'S'  : forsaving.name}
 		'user'                 : { 'S'  : fake_user},
 		'date-start'           : { 'N'  : forsaving['date-start']},
 		'date-end'             : { 'N'  : forsaving['date-end']},
