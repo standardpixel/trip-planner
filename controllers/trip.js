@@ -1,7 +1,9 @@
 var AWS      = require('sp-aws-client'),
+    moment   = require('moment'),
     colors   = require('colors'),
     response = {},
-	trip     = {};
+	trip     = {},
+	human    = {};
 	
 exports.init = function(params, callback, scope) {
 	
@@ -21,9 +23,11 @@ exports.init = function(params, callback, scope) {
 			}
 		}
 		
-		response.trip = trip;
+		human['date-start']           = moment(parseInt(trip['date-start'], 10)).fromNow();
+		human['describes-date-start'] = moment(parseInt(trip['date-start'], 10)).isAfter(new Date()) ? 'begins' : 'began';
 		
-		console.log(trip);
+		response.trip = trip;
+		response.human = human;
 		
 		callback.apply(scope, [response]);
 	});

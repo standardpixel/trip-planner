@@ -24,7 +24,8 @@
 	"aws-sdk"   : "*",
 	"less"      : "*",
 	"validator" : "*",
-	"mocha"     : "*"
+	"mocha"     : "*",
+	"moment"    : "*"
   },
   "license": "MIT",
   "engines": {

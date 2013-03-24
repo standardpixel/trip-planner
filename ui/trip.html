@@ -1,3 +1,10 @@
-<h1>{{trip.name}}</h1>
+<h1>
+	{{#if trip.name}}
+		{{trip.name}}
+	{{else}}
+		A trip without a name
+	{{/if}}
+</h1>
+<div data-when="{{trip.date-start}}">{{human.describes-date-start}} <span class="when-date">{{human.date-start}}</span></div>
 
 

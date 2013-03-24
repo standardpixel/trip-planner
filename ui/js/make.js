@@ -147,7 +147,7 @@ SP.trip = (function() {
 				data: validated_values,
 				success: function( data ) {
 					if(data && data.status === 'success') {
-						location.href = '/' + data.TripId.split(':::')[0] + '/' + data.TripId.split(':::')[1];
+						location.href = '/' + data.TripId.split(':::')[0] + '/trips/' + data.TripId.split(':::')[1];
 					} else {
 						console.error('Error: Creating trip', data);
 					}
