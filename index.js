@@ -84,6 +84,13 @@ setupUIRoute('/:user/trips/:trip_id', 'trip.html', {
 	controller : 'trip'
 });
 
+setupUIRoute('/:user/trips', 'trips.html', {
+	app_title  : app_title,
+	page_title : 'Trips',
+	module     : 'trips',
+	controller : 'trips'
+});
+
 setupUIRoute('/', 'index.html', {
 	app_title  : app_title,
 	page_title : 'Welcome',

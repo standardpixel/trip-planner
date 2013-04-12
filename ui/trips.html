@@ -1,0 +1,8 @@
+<h1>Trips</h1>
+<ul>
+{{#each trips}}
+	{{#if name.S}}
+		<li><a href="/{{c_url}}">{{name.S}}</a></li>
+	{{/if}}
+{{/each}}
+</ul>
