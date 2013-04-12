@@ -18,14 +18,15 @@
     "url": "https://github.com/standardpixel/standardpixel-prototype-boilerplate"
   },
   "dependencies" : {
-	"colors"    : "*",
-	"express"   : "*",
-	"hbs"       : "*",
-	"aws-sdk"   : "*",
-	"less"      : "*",
-	"validator" : "*",
-	"mocha"     : "*",
-	"moment"    : "*"
+	"colors"        : "*",
+	"express"       : "*",
+	"hbs"           : "*",
+	"aws-sdk"       : "*",
+	"less"          : "*",
+	"validator"     : "*",
+	"mocha"         : "*",
+	"moment"        : "*",
+	"sp-aws-client" : "git://github.com/standardpixel/sp-aws-client.git"
   },
   "license": "MIT",
   "engines": {
